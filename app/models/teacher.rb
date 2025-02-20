@@ -32,4 +32,13 @@ class Teacher < ApplicationRecord
       FullTextSearch::Query.new(query_string).search_by_all_prefixes
     )
   }
+
+  # Instance methods
+  def eligible_for_mentor_funding?
+    mentor_funding_end_date.nil? || mentor_ineligible_for_funding_reason.nil?
+  end
+
+  def ineligible_for_mentor_funding?
+    mentor_funding_end_date.present? || mentor_ineligible_for_funding_reason.present?
+  end
 end

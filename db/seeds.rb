@@ -81,8 +81,8 @@ end
 
 print_seed_info("Adding teachers")
 
-emma_thompson = Teacher.create!(trs_first_name: 'Emma', trs_last_name: 'Thompson', trn: '1023456')
-kate_winslet = Teacher.create!(trs_first_name: 'Kate', trs_last_name: 'Winslet', trn: '1023457')
+emma_thompson = Teacher.create!(trs_first_name: 'Emma', trs_last_name: 'Thompson', trn: '1023456', mentor_funding_end_date: 1.year.from_now)
+kate_winslet = Teacher.create!(trs_first_name: 'Kate', trs_last_name: 'Winslet', trn: '1023457', mentor_ineligible_for_funding_reason: 'completed_declaration_received')
 alan_rickman = Teacher.create!(trs_first_name: 'Alan', trs_last_name: 'Rickman', trn: '2084589')
 hugh_grant = Teacher.create!(trs_first_name: 'Hugh', trs_last_name: 'Grant', trn: '3657894')
 jamie_parsons = Teacher.create!(trs_first_name: 'Jamie', trs_last_name: 'Parsons', trn: '1237894')
@@ -609,3 +609,10 @@ YAML.load_file(Rails.root.join('config/personas.yml'))
       .tap { |user| user.dfe_roles.create! }
       .then { |user| describe_user(user) }
 end
+
+print_seed_info('Adding funding exemptions:', colour: :red)
+
+FundingExemption.create!(trn: imogen_stubbs.trn, reason: 'completed_declaration_received')
+FundingExemption.create!(trn: harriet_walter.trn, reason: 'completed_during_early_roll_out')
+FundingExemption.create!(trn: '3002582', reason: 'started_not_completed') # Robson Scottie
+FundingExemption.create!(trn: '3002580', reason: 'started_not_completed') # Muhammed Ali

@@ -341,3 +341,9 @@
   - year
   - created_at
   - updated_at
+  :funding_exemptions:  
+  - id                  
+  - trn                 
+  - reason              
+  - created_at          
+  - updated_at          

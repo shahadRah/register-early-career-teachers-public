@@ -35,10 +35,10 @@ class Teacher < ApplicationRecord
 
   # Instance methods
   def eligible_for_mentor_funding?
-    mentor_funding_end_date.nil? || mentor_ineligible_for_funding_reason.nil?
+    mentor_funding_end_date.blank? && mentor_ineligible_for_funding_reason.blank?
   end
 
   def ineligible_for_mentor_funding?
-    mentor_funding_end_date.present? || mentor_ineligible_for_funding_reason.present?
+    !eligible_for_mentor_funding?
   end
 end

@@ -20,7 +20,7 @@ describe Schools::RegisterMentor do
   describe '#call' do
     let(:mentor_at_school_period) { MentorAtSchoolPeriod.first }
 
-    context "when a Teacher record with the same trn don't exist" do
+    context "when a Teacher record with the same trn doesn't exist" do
       let(:teacher) { Teacher.first }
 
       it 'creates a new Teacher record' do
@@ -29,23 +29,32 @@ describe Schools::RegisterMentor do
         expect(teacher.trs_last_name).to eq(trs_last_name)
         expect(teacher.corrected_name).to eq(corrected_name)
         expect(teacher.trn).to eq(trn)
+        expect(teacher.mentor_funding_end_date).to be_nil
+        expect(teacher.mentor_ineligible_for_funding_reason).to be_nil
+      end
+
+      context 'and has a mentor funding exemption' do
+        before { FactoryBot.create(:funding_exemption, trn:, reason: 'started_not_completed') }
+
+        it 'creates a new Teacher record ineligible for funding' do
+          expect { service.register! }.to change(Teacher, :count).from(0).to(1)
+          expect(teacher.mentor_funding_end_date).to eq(Time.zone.today)
+          expect(teacher.mentor_ineligible_for_funding_reason).to eq('started_not_completed')
+        end
       end
     end
 
-    context "when a Teacher record with the same trn exists but has no mentor records" do
+    context "when a Teacher record with the same trn exists" do
       let!(:teacher) { FactoryBot.create(:teacher, trn:) }
 
-      it "doesn't create a new Teacher record" do
-        expect { service.register! }.to_not change(Teacher, :count)
+      context "without MentorATSchoolPeriod records" do
+        it { expect { service.register! }.to_not change(Teacher, :count) }
       end
-    end
 
-    context "when a Teacher record with the same trn exists and has mentor records" do
-      let!(:teacher) { FactoryBot.create(:teacher, trn:) }
-      let!(:mentor) { FactoryBot.create(:mentor_at_school_period, teacher:) }
+      context "with MentorATSchoolPeriod records" do
+        before { FactoryBot.create(:mentor_at_school_period, teacher:) }
 
-      it "raise an exception" do
-        expect { service.register! }.to raise_error(ActiveRecord::RecordInvalid)
+        it { expect { service.register! }.to raise_error(ActiveRecord::RecordInvalid) }
       end
     end
 

@@ -25,13 +25,17 @@ module Schools
       ::Teacher.find_by_trn(trn)&.mentor_at_school_periods&.exists?
     end
 
+    # FIXME: UX needs graceful redirect at this point
     def create_teacher!
       raise ActiveRecord::RecordInvalid if already_registered_as_a_mentor?
 
-      # FIXME: UX needs graceful redirect at this point
-
-      @teacher = ::Teacher.create_with(trs_first_name:, trs_last_name:, corrected_name:)
-                          .find_or_create_by!(trn:)
+      @teacher = ::Teacher.create_with(
+        trs_first_name:,
+        trs_last_name:,
+        corrected_name:,
+        mentor_ineligible_for_funding_reason:,
+        mentor_funding_end_date:
+      ).find_or_create_by!(trn:)
     end
 
     def school
@@ -40,6 +44,14 @@ module Schools
 
     def start_at_school!
       teacher.mentor_at_school_periods.create!(school:, started_on:, email:)
+    end
+
+    def mentor_ineligible_for_funding_reason
+      FundingExemption.find_by(trn:)&.reason
+    end
+
+    def mentor_funding_end_date
+      Time.zone.now if mentor_ineligible_for_funding_reason
     end
   end
 end

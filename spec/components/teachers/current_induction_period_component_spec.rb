@@ -61,11 +61,21 @@ RSpec.describe Teachers::CurrentInductionPeriodComponent, type: :component do
       expect(page).not_to have_link("Edit")
     end
 
-    it "does not include an edit link when the induction period has an outcome" do
-      current_period.update(outcome: "pass")
-      component = described_class.new(teacher:, enable_edit: true)
-      render_inline(component)
-      expect(page).not_to have_link("Edit")
+    context "when the induction period has an outcome" do
+      let!(:current_period) do
+        FactoryBot.create(:induction_period, :active,
+                          teacher:,
+                          appropriate_body:,
+                          started_on: 6.months.ago,
+                          outcome: "pass",
+                          induction_programme: "cip")
+      end
+
+      it "does not include an edit link when " do
+        component = described_class.new(teacher:, enable_edit: true)
+        render_inline(component)
+        expect(page).not_to have_link("Edit")
+      end
     end
   end
 end

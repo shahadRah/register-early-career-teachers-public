@@ -13,7 +13,6 @@ module Schools
             change_email_address: ChangeEmailAddressStep,
             change_mentor_details: ChangeMentorDetailsStep,
             check_answers: CheckAnswersStep,
-            review_mentor_eligibility: ReviewMentorEligibilityStep,
             confirmation: ConfirmationStep,
             email_address: EmailAddressStep,
             find_mentor: FindMentorStep,
@@ -21,6 +20,7 @@ module Schools
             no_trn: NoTRNStep,
             not_found: NotFoundStep,
             review_mentor_details: ReviewMentorDetailsStep,
+            review_mentor_eligibility: ReviewMentorEligibilityStep,
             trn_not_found: TRNNotFoundStep,
           }
         ]
@@ -39,14 +39,6 @@ module Schools
 
       def mentor
         @mentor ||= Mentor.new(store)
-      end
-
-      def mentor_funding_available?
-        if (record = Teacher.find_by(trn: mentor.trn))
-          record.eligible_for_mentor_funding?
-        else
-          FundingExemption.find_by(trn: mentor.trn).blank?
-        end
       end
     end
   end

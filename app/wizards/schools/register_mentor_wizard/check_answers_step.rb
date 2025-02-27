@@ -6,7 +6,7 @@ module Schools
       end
 
       def previous_step
-        wizard.mentor_funding_available? ? :review_mentor_eligibility : :email_address
+        wizard.mentor.funding_available? ? :review_mentor_eligibility : :email_address
       end
 
     private

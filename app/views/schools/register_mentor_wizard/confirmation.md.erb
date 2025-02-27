@@ -19,7 +19,7 @@ We'll email <%= @mentor.full_name %> to confirm you have registered them.
 
 They do not need to provide us with any further details.
 
-<% if @wizard.mentor_funding_available? %>
+<% if @wizard.mentor.funding_available? %>
 We'll pass on their details to <%= @wizard.ect.lead_provider.name %> who will contact them to arrange mentor training.
 <% else %>
 They cannot do mentor training according to our records. 

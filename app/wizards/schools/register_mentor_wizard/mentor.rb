@@ -41,6 +41,14 @@ module Schools
         trs_date_of_birth.to_date == date_of_birth.to_date
       end
 
+      def funding_available?
+        if (record = Teacher.find_by(trn:))
+          record.eligible_for_mentor_funding?
+        else
+          FundingExemption.find_by(trn:).blank?
+        end
+      end
+
       def register!
         Schools::RegisterMentor.new(trs_first_name:,
                                     trs_last_name:,

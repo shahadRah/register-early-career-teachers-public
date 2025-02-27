@@ -11,7 +11,7 @@ module Schools
 
       def next_step
         return :cant_use_email if mentor.cant_use_email?
-        return :review_mentor_eligibility if wizard.mentor_funding_available?
+        return :review_mentor_eligibility if wizard.mentor.funding_available?
 
         :check_answers
       end

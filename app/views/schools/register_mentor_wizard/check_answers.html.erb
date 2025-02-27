@@ -1,5 +1,5 @@
 <%= 
-  if @wizard.mentor_funding_available?
+  if @wizard.mentor.funding_available?
     render 'check_answers', backlink_href: schools_register_mentor_wizard_review_mentor_eligibility_path 
   else
     render 'check_answers', backlink_href: schools_register_mentor_wizard_email_address_path 

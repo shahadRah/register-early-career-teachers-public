@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_24_091353) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_27_120220) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "pg_catalog.plpgsql"
@@ -137,6 +137,12 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_24_091353) do
     t.index ["user_id"], name: "index_dfe_roles_on_user_id"
   end
 
+  create_table "early_roll_out_mentors", force: :cascade do |t|
+    t.string "trn", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "ect_at_school_periods", force: :cascade do |t|
     t.bigint "school_id", null: false
     t.bigint "teacher_id", null: false
@@ -202,13 +208,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_24_091353) do
     t.index ["teacher_id"], name: "index_events_on_teacher_id"
     t.index ["training_period_id"], name: "index_events_on_training_period_id"
     t.index ["user_id"], name: "index_events_on_user_id"
-  end
-
-  create_table "funding_exemptions", force: :cascade do |t|
-    t.string "trn", null: false
-    t.enum "reason", null: false, enum_type: "mentor_ineligible_for_funding_reason"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "gias_school_links", force: :cascade do |t|

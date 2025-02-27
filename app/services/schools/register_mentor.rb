@@ -46,12 +46,16 @@ module Schools
       teacher.mentor_at_school_periods.create!(school:, started_on:, email:)
     end
 
+    def early_roll_out_mentor?
+      EarlyRollOutMentor.find_by(trn:).present?
+    end
+
     def mentor_ineligible_for_funding_reason
-      FundingExemption.find_by(trn:)&.reason
+      'completed_during_early_roll_out' if early_roll_out_mentor?
     end
 
     def mentor_funding_end_date
-      Time.zone.now if mentor_ineligible_for_funding_reason
+      Date.new(2021, 4, 19) if early_roll_out_mentor?
     end
   end
 end

@@ -46,9 +46,22 @@ RSpec.describe "schools/register_mentor_wizard/check_answers.html.erb" do
       it { expect(backlink).to have_link('Back', href: schools_register_mentor_wizard_review_mentor_eligibility_path) }
     end
 
-    context 'with exemption' do
+    context 'with legacy exemption' do
       before do
-        FactoryBot.create(:funding_exemption, trn: mentor.trn)
+        FactoryBot.create(:early_roll_out_mentor, trn: mentor.trn)
+        render
+      end
+
+      it { expect(backlink).to have_link('Back', href: schools_register_mentor_wizard_email_address_path) }
+    end
+
+    context 'with existing training exemption' do
+      before do
+        FactoryBot.create(:teacher,
+                          trn: mentor.trn,
+                          mentor_funding_end_date: Time.zone.today,
+                          mentor_ineligible_for_funding_reason: 'completed_declaration_received')
+
         render
       end
 
@@ -74,7 +87,7 @@ RSpec.describe "schools/register_mentor_wizard/check_answers.html.erb" do
 
     context 'with legacy exemption' do
       before do
-        FactoryBot.create(:funding_exemption, trn: mentor.trn)
+        FactoryBot.create(:early_roll_out_mentor, trn: mentor.trn)
         render
       end
 

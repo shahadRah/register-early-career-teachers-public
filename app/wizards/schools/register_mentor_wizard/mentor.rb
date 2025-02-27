@@ -45,7 +45,7 @@ module Schools
         if (record = Teacher.find_by(trn:))
           record.eligible_for_mentor_funding?
         else
-          FundingExemption.find_by(trn:).blank?
+          EarlyRollOutMentor.find_by(trn:).blank?
         end
       end
 

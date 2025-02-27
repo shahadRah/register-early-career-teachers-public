@@ -636,7 +636,8 @@ end
 
 print_seed_info('Adding funding exemptions:', colour: :red)
 
-FundingExemption.create!(trn: imogen_stubbs.trn, reason: 'completed_declaration_received')
-FundingExemption.create!(trn: harriet_walter.trn, reason: 'completed_during_early_roll_out')
-FundingExemption.create!(trn: '3002582', reason: 'started_not_completed') # Robson Scottie
-FundingExemption.create!(trn: '3002580', reason: 'started_not_completed') # Muhammed Ali
+# completed_during_early_roll_out
+EarlyRollOutMentor.create!(trn: imogen_stubbs.trn)
+EarlyRollOutMentor.create!(trn: harriet_walter.trn)
+EarlyRollOutMentor.create!(trn: '3002582') # Robson Scottie
+EarlyRollOutMentor.create!(trn: '3002580') # Muhammed Ali

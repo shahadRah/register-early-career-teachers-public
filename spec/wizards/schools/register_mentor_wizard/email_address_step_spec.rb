@@ -9,7 +9,7 @@ describe Schools::RegisterMentorWizard::EmailAddressStep, type: :model do
 
   context 'with funding exemption' do
     before do
-      FactoryBot.create(:funding_exemption, trn: "1234567")
+      FactoryBot.create(:early_roll_out_mentor, trn: "1234567")
     end
 
     it_behaves_like 'an email step', current_step: :email_address,

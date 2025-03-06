@@ -22,7 +22,7 @@ A breaking change disrupts the existing functionality or behaviour of the API, c
 Breaking changes include:
 
 - Removing an existing endpoint  
-- Changing the data structure or format in which we serve data to lead providers  
+- Changing the data structure, field values or format in which we serve data to lead providers  
 - Introducing new validation rules or required fields  
 
 ### Example: Changing the Response Format of an Existing Endpoint
@@ -53,7 +53,6 @@ A non-breaking change does not break or disrupt existing functionality or behavi
 Non-breaking changes include:
 
 - New endpoints (for example, ECF transfers)  
-- New values to existing fields (for example, extended declarations or mentor funding end date)  
 - Adding optional fields to the request body  
 - Adding new optional filters to an endpoint (e.g., a non-required ability to filter by cohort on the get declarations endpoint)  
 
@@ -88,24 +87,15 @@ In this instance, providers can update their integrations to submit start declar
 
 ## Release management and provider engagement
 
-Release management is crucial to ensure that Lead Providers have a positive experience when adopting the changes for our API. It's the DfE's responsibility to ensure that providers are `well-informed`, `prepared` and `supported` throughout the release. This ensures that the delivery of the ECF training is not impacted.
+Release management is crucial to ensure that Lead Providers have a positive experience when adopting the changes for our API. It's the DfE's responsibility to ensure that providers are `well-informed`, `prepared` and `supported` throughout the release. This ensures that the delivery of the ECF training is not impacted. For any changes breaking or non-breaking LPDOB:
 
-### Breaking Changes  
+- Engage with providers as early as possible, ensuring they have visibility of the upcoming changes and are consulted.
+- Share detailed specifications, release note and updated guidance are shared as soon as they are available. This helps providers assess the impact on their systems and plan necessary updates.  
+- Attend check-ins and engaging with technical teams for lead providers to walk through the changes, answer questions, and gather feedback on any implementation concerns.  
+- Release the updated API into the sandbox environment, allowing providers to conduct testing and validate integrations before changes go live.
+- For breaking changes, retrieve feedback from providers on their timelines to integrate and test. 
 
-When introducing breaking changes, we recognise the potential impact on providers, our approach includes:  
-
-- Engage with providers as early as possible, ensuring they have visibility of the upcoming changes and are consulted.  
-- Detailed specifications, release note and updated guidance are shared as soon as they are available. This helps providers assess the impact on their systems and plan necessary updates.  
-- Attending check-ins and engaging with technical teams for lead providers to walk through the changes, answer questions, and gather feedback on any implementation concerns.  
-- We release the updated API into the sandbox environment, allowing providers to conduct testing and validate integrations before changes go live.  
-- API Logs are monitored to see error and success rates on the new/affected endpoint 
-
-### Non-Breaking Changes  
-
-For non-breaking changes, such as adding new optional fields or introducing features that do not require immediate action from providers. Our approach includes:
-
-- Engage with providers to ensure they are aware of new capabilities and can plan for adoption 
-- Update our API documentation and issue a release note with the changes
+We appreciate that these changes can have huge ramifications on their integrations and thus their ability to deliver of the ECF policy.
  
 
 ## Versioning and Managing Changes

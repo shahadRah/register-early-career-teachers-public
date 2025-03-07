@@ -87,7 +87,7 @@ In this instance, providers can update their integrations to submit start declar
 
 ## Release management and provider engagement
 
-Release management is crucial to ensure that Lead Providers have a positive experience when adopting the changes for our API. It's the DfE's responsibility to ensure that providers are `well-informed`, `prepared` and `supported` throughout the release. This ensures that the delivery of the ECF training is not impacted. For any changes breaking or non-breaking LPDOB:
+Release management is crucial to ensure that Lead Providers have a positive experience when adopting the changes for our API. It's the DfE's responsibility to ensure that providers are **well-informed**, **prepared** and **supported** throughout the release. This ensures that the delivery of the ECF training is not impacted. For any changes breaking or non-breaking LPDOB:
 
 - Engage with providers as early as possible, ensuring they have visibility of the upcoming changes and are consulted.
 - Share detailed specifications, release note and updated guidance are shared as soon as they are available. This helps providers assess the impact on their systems and plan necessary updates.  
